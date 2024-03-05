@@ -1,31 +1,59 @@
 package pl.mgarbowski.linkedlists;
 
-import java.util.ArrayList;
-
 /**
  * <a href="https://leetcode.com/problems/reorder-list/">143. Reorder List</a>
  */
 public class ReorderList {
+
+    /**
+     * Time complexity O(n)
+     * Space complexity O(1)
+     */
     public void reorderList(ListNode head) {
         if (head == null || head.next == null) {
             return;
         }
 
-        var nodes = new ArrayList<ListNode>();
-        var node = head;
-        while (node != null) {
-            nodes.add(node);
-            node = node.next;
+        var left = head;
+        var middle = findMiddle(head);
+        var right = middle.next;
+        middle.next = null;
+        right = ReverseLinkedList.reverseListIterative(right);
+
+        ListNode nextLeft;
+        ListNode nextRight;
+
+        while (right != null) {
+            nextLeft = left.next;
+            left.next = right;
+            left = nextLeft;
+
+            nextRight = right.next;
+            right.next = left;
+            right = nextRight;
+        }
+    }
+
+    /**
+     * @param head head of the input list
+     * @return floor((n+1)/2) th node
+     */
+    ListNode findMiddle(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
         }
 
-        var left = 0;
-        var right = nodes.size() - 1;
-        while (left < right) {
-            nodes.get(left).next = nodes.get(right);
-            left++;
-            nodes.get(right).next = nodes.get(left);
-            right--;
+        var fast = head;
+        var slow = head;
+        var idx = 0;
+        while (fast.next != null) {
+            idx++;
+            fast = fast.next;
+            if (idx % 2 == 0) {
+                slow = slow.next;
+            }
         }
-        nodes.get(left).next = null;
+
+        return slow;
     }
 }

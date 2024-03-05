@@ -9,7 +9,7 @@ public class ReverseLinkedList {
      * Time complexity O(n)
      * Space complexity O(1) - no extra memory
      */
-    public ListNode reverseListIterative(ListNode head) {
+    public static ListNode reverseListIterative(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -31,7 +31,7 @@ public class ReverseLinkedList {
      * Time complexity O(n)
      * Space complexity O(n) - one stack frame per list node
      */
-    public ListNode reverseListRecursive(ListNode head) {
+    public static ListNode reverseListRecursive(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }

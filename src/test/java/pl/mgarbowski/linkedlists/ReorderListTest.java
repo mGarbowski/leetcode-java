@@ -23,4 +23,18 @@ class ReorderListTest {
         R.reorderList(head);
         assertEquals(expected, head.toList());
     }
+
+    @Test
+    void findMiddleEvenLength() {
+        var head = ListNode.fromList(List.of(1, 2, 3, 4));
+        var expected = head.next;
+        assertEquals(expected, R.findMiddle(head));
+    }
+
+    @Test
+    void findMiddleOddLength() {
+        var head = ListNode.fromList(List.of(1, 2, 3, 4, 5));
+        var expected = head.next.next;
+        assertEquals(expected, R.findMiddle(head));
+    }
 }
